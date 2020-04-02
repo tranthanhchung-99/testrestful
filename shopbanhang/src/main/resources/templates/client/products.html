@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html layout:decorator="client/template">
+<head>
+<meta charset="UTF-8">
+<title>products</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<form th:action="@{/products}" method="get">
+
+		<p>DANH SACH THONG TIN PRODUCT</p>
+
+		<div>
+			<form>
+				<input type="text" name="keyword" th:value="${keyword}"
+					placeholder="nhap vao day!! ten product can tim kiem"> 
+					
+				  <label>
+					category : <select type="text" name="categoryName"
+					th:value="${categoryName}">
+						<option th:each="id: ${categoryList}" th:value="${id.name}"
+							th:text="${id.name}"></option>
+						<option selected="selected"></option>
+				</select>
+				</label> 
+				
+				
+				<label> Thuong Hieu : <select type="text"
+					name="thuongHieuName" th:value="${thuongHieuName}">
+						<option th:each="id: ${thuongHieuList}" th:value="${id.name}"
+							th:text="${id.name}"></option>
+						<option selected="selected"></option>
+				</select>
+				</label> <label> Gioi Tinh : <select type="text" name="gioiTinhName"
+					th:value="${gioiTinhName}">
+						<option th:each="id: ${gioiTinhList}" th:value="${id.name}"
+							th:text="${id.name}"></option>
+						<option selected="selected"></option>
+				</select>
+				</label> <label>Kich Thuoc : <select type="text"
+					name="kichThuocName" th:value="${kichThuocName}">
+						<option th:each="id: ${kichThuocList}" th:value="${id.name}"
+							th:text="${id.name}"></option>
+						<option selected="selected"></option>
+				</select>
+
+				</label> <input type="text" name="priceStart" th:value="${priceStart}"
+					placeholder="giá từ"> <input type="text" name="priceEnd"
+					th:value="${priceEnd}" placeholder="giá đến">
+
+				<button type="submit">search</button>
+			</form>
+		</div>
+		<div th:each="pro :${productList}">
+			<div>
+				<a th:href="@{ '/product?id='+${pro.id}}" role="button">
+
+					<h1 th:text="${pro.name }"></h1>
+				</a>
+				<div>
+					<td><img th:src="@{'/download?image='+${pro.image}}"
+						style="width: 50px; height: 30px;"></td>
+				</div>
+				<div>
+					<ul class="list-group">
+						<li th:text="${pro.price }"></li>
+						<li th:text="${pro.description }"></li>
+						<li th:text="${pro.category.name }">
+						<li th:text="${pro.thuongHieuDTO.name }"></li>
+						<li th:text="${pro.kichThuocDTO.name }"></li>
+						<td th:text="${pro.gioiTinhDTO.name }"></td>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<a th:href="@{ '/member/add-to-cart?pid='+${pro.id}}" role="button">
+					Add to cart</a>
+			</div>
+		</div>
+		<div>
+			<a class="btn btn-primary"
+				th:href="@{'/products?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+				MORE</a>
+		</div>
+</body>
+</html>

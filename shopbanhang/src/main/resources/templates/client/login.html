@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<p th:if="${err != null}">Invalid Username or Password</p>
+	<form th:action="@{/login}" method="post">
+		<input type="text" placeholder="User name" name="username" /> <input type="password" placeholder="Password" name="password" /> <input
+			type="submit" value="Login">
+	</form>
+	<div>
+		<a th:href="@{register}">SignUp</a>
+	</div>
+</body>
+</html>

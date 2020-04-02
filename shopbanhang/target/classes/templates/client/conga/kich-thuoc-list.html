@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="admin/template">
+<head>
+<meta charset="UTF-8">
+<title>kichThuoc</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<p>Danh sach kichThuoc</p>
+	<a th:href="@{/conga/add}">Add kichThuoc</a>
+	<div>
+		<form th:action="@{/conga/search}" method="get">
+			<label>Search:</label><input type="text" name="keyword"
+				placeholder="nhap keyword" th:value="${keyword}" /> <input
+				type="submit" value="search" />
+		</form>
+	</div>
+	<div>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Age</td>
+				<td>Option</td>
+			</tr>
+			<tr th:each="kichThuoc : ${conGaList}">
+				<td th:text="${kichThuoc.id}"></td>
+				<td th:text="${kichThuoc.name}"></td>
+				<td th:text="${kichThuoc.age}"></td>
+				<td><a th:href="@{'/conga/update?id='+${kichThuoc.id}}">Edit</a>
+					| <a th:href="@{'/conga/delete?id='+${kichThuoc.id}}">Delete</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		
+	</div>
+</body>
+</html>

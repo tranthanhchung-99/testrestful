@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html layout:decorator="client/template">
+<head>
+<meta charset="UTF-8">
+<title>Product</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<h1>THONG TIN SAN PHAM</h1>
+	<img th:src="@{'/download?image='+${product.image }}" alt="#" />
+	<a th:href="@{'/member/add-to-cart?pid='+${product.id}}" role="button">
+		Add to cart</a>
+	
+	<div th:text="${product.id }"></div>
+	<div th:text="${product.name }"></div>
+	<div th:text="${product.price }"></div>
+	<div th:text="${product.description }"></div>
+	<div th:text="${product.category.name }"></div>
+	<p>_____comment_____</p>
+	<div th:each="c:${commentProduct}">
+		<p th:text="${c.comment}"></p>
+		<p th:text="${c.commentDate}"></p>
+		<p th:text="${c.userId}"></p>
+	</div>
+	<br />
+	<form th:action="@{/member/comment}" method="post">
+		<input type="hidden" name="productId" th:value="${product.id}" /> <input
+			type="text" name="comment" /><input type="submit" value="send" />
+	</form>
+	<p>-------vote star-------</p>
+	<div th:each="r:${reviews}">
+		<label th:text="${r.starNumber}"></label>star from
+		userId:<label th:text="${r.userId}"></label>
+	</div>
+	<div>
+		<form th:action="@{/member/review}" method="post">
+			<input type="hidden" name="productId" th:value="${product.id}" />
+			 <input type="radio" id="star5" name="starNumber" value="5" /> 
+			 <label class="full" for="star5" title="Awesome - 5 stars"></label> 
+			 <input type="radio" id="star4" name="starNumber" value="4" />
+			 <label class="full" for="star4" title="Pretty good - 4 stars"></label> 
+			 <input type="radio" id="star3" name="starNumber" value="3" /> 
+			 <label class="full" for="star3" title="Meh - 3 stars"></label>
+			 <input type="radio" id="star2" name="starNumber" value="2" /> 
+			 <label class="full" for="star2" title="Kinda bad - 2 stars"></label> 
+			 <input type="radio" id="star1" name="starNumber" value="1" /> 
+			 <label class="full" for="star1" title="Sucks big time - 1 star"></label> 
+			 <input type="submit" value="send" />
+		</form>
+	</div>
+</body>
+</html>

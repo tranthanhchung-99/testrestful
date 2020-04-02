@@ -1,0 +1,68 @@
+package com.linkin.model;
+
+public class BillDTO {
+	private Long id;
+	private UserDTO user;
+	private String buyDate;
+	private Long priceTotal;
+	private Long total;
+	private Integer discountPercent;
+	private String status;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
+	public String getBuyDate() {
+		return buyDate;
+	}
+
+	public void setBuyDate(String buyDate) {
+		this.buyDate = buyDate;
+	}
+
+	public Long getPriceTotal() {
+		return priceTotal;
+	}
+
+	public void setPriceTotal(Long d) {
+		this.priceTotal = d;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Integer getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public void setDiscountPercent(Integer discountPercent) {
+		this.discountPercent = discountPercent;
+	}
+
+	public Long getTotal() {
+		return total;
+	}
+
+	public void setTotal(Long total) {
+		this.total = total;
+	}
+
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html layout:decorator="client/template">
+<head>
+<meta charset="UTF-8">
+<title>products</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	
+
+		<p>DANH MUC</p>
+		<div>
+		<form th:action="@{/category/search}" method="get">
+			<label>Search:</label><input type="text" name="keyword"
+				placeholder="nhap keyword" th:value="${keyword}" /> <input
+				type="submit" value="search" />
+		</form>
+	</div>
+	<div>
+		<table border="1">
+			<tr>
+				<td>Id</td>
+				<td>Name</td>
+				<td>Option</td>
+			</tr>
+			<tr th:each="category : ${categoryList}">
+				<td th:text="${category.id}"></td>
+				<td th:text="${category.name}"></td>
+				<td><a th:href="@{'/productsByCategory?id='+${category.id}}">detail</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<a class="btn btn-primary"
+			th:href="@{'/category/search?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a>
+	</div>
+</body>
+</html>

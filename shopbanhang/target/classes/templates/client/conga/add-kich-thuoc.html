@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html >
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="js/app-ajax.js"></script>
+<head>
+<meta charset="UTF-8" />
+<title>conga Add</title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<div>
+		<form   th:action="@{/conga/add}" method="post">
+			<div>
+				<label>name</label><input type="text" name="name"
+					placeholder="nhap name " /> 
+			</div>
+			<div>
+				<label>age</label><input type="text" name="age"
+					placeholder="nhap age " />
+			</div>
+			<div> <input type="submit" value="add" /></div>
+		</form>
+		<p>HELLO</p>
+		<div id="content"></div>
+		
+	</div>
+	<script type="text/javascript">
+		var add=[[@{conga/add}]];
+   $(document).ready(function()
+   { 
+      //khai báo biến submit form lấy đối tượng nút submit
+      var submit = $("button[type='submit']");
+
+      //khi nút submit được click
+      submit.click(function()
+      {
+        //khai báo các biến dữ liệu gửi lên server
+        var name = $("input[name='name']").val(); //lấy giá trị trong input name
+ 		var age=$("input[name=age]").val();
+        //Kiểm tra xem trường đã được nhập hay chưa
+        if(name == ''){
+          alert('Vui lòng nhập Tên ');
+          return false;
+        }
+        if(age == ''){
+            alert('Vui lòng nhập age ');
+            return false;
+          }
+ 
+        //Lấy toàn bộ dữ liệu trong Form
+        var data = $('form#form_input').serialize();
+      
+        //Sử dụng phương thức Ajax.
+        $.ajax({
+              type : 'POST', //Sử dụng kiểu gửi dữ liệu POST
+              url : add, //gửi dữ liệu sang trang data.php
+              data : data, //dữ liệu sẽ được gửi
+              success : function(data)  // Hàm thực thi khi nhận dữ liệu được từ server
+                        { 
+                           if(data == 'false') 
+                           {
+                             alert('Không nhap');
+                           }else{
+                             $('#content').html(data); dữ liệu HTML trả về sẽ được chèn vào trong thẻ có id content
+                           }
+                        }
+              });
+              return false;
+        });
+    });
+</script>
+</body>
+</html>

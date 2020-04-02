@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<div th:fragment="menu" th:remove="tag">
+		<p>Menu</p>
+		<ul>
+			<li><a th:href="@{/category/search}">Category</a></li>
+			<li><a th:href="@{/products}">Products</a></li>
+			<li><a th:href="@{/cart}">Cart</a></li>
+			<li><a th:href="@{/member/bills}">History</a></li>
+			<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+			<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Login</a></li>
+			<li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+		</ul>
+		<hr />
+	</div>
+</body>
+</html>

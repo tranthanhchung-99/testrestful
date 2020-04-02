@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html layout:decorator="client/template">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body layout:fragment="content" th:remove="tag">
+	<div>
+		<form th:if="${admin}!=null" th:action="@{/admin/bill/search}" method="get">
+			<label>Search:</label><input type="text" name="keyword" placeholder="nhap keyword"  th:value="${keyword}"/> <input type="submit" value="search" />
+		</form>
+	</div>
+	<h1>Danh Sach Bill</h1>
+	
+	<table border="1px solid black">
+		<tr>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>ADDRESS</th>
+			<th>BUYDATE</th>
+			<th>TOTAL</th>
+			<th>DISCOUNT</th>
+			<th>PRICETOTAL</th>
+			<th>OPTION</th>
+		</tr>
+
+		<tr th:each="b:${bills }">
+			<td th:text="${b.id }"></td>
+			<td th:text="${b.user.name}"></td>
+			<td th:text="${b.user.address}"></td>
+			<td th:text="${b.buyDate }"></td>
+			<td th:text="${b.total }"></td>		
+			<td th:text="${b.discountPercent}+'%'"></td>
+			<td th:text="${b.priceTotal }"></td>
+			<td><a th:href="@{'/member/bill?billId='+${b.id }}">detail</a>|<a th:href="@{'/member/delete/bills?billId='+${b.id }}">DELETE</a></td>
+		</tr>
+
+	</table>
+	<div>
+		<a class="btn btn-primary" th:if="${admin}==null"
+			th:href="@{'/member/bills?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a> <a class="btn btn-primary" th:if="${admin}!=null"
+			th:href="@{'/admin/bill/search?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a>
+	</div>
+</body>
+</html>
