@@ -1,42 +1,75 @@
 <!DOCTYPE html>
-<html >
-<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="js/app-ajax.js"></script>
+<html>
+
 <head>
 <meta charset="UTF-8" />
 <title>conga Add</title>
 </head>
 <body layout:fragment="content" th:remove="tag">
 	<div>
-		<form   th:action="@{/conga/add}" method="post">
+		<form method="post">
 			<div>
-				<label>name</label><input type="text" name="name"
-					placeholder="nhap name " /> 
+				<label>name</label><input type="text" id="name" name="name"
+					placeholder="nhap name " />
 			</div>
 			<div>
-				<label>age</label><input type="text" name="age"
+				<label>age</label><input type="text" id="age" name="age"
 					placeholder="nhap age " />
 			</div>
-			<div> <input type="submit" value="add" /></div>
+			<div>
+				<input type="button" id="submitForm" value="add" />
+			</div>
 		</form>
 		<p>HELLO</p>
 		<div id="content"></div>
-		
+
 	</div>
-	<script type="text/javascript">
-		var add=[[@{conga/add}]];
+
+</body>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+	//var add=[[@{conga/add}]];
    $(document).ready(function()
    { 
+	 
+	   // submitForm
+	    $("#submitForm").click(function(){
+		   let name = $("#name").val();
+		   let age = $("#age").val();
+		   
+		   $.ajax({
+	              type : 'POST', //Sử dụng kiểu gửi dữ liệu POST
+	              url : 'http://localhost:8080/conga/add', //gửi dữ liệu sang trang data.php
+	              data : {
+	            	  name: name,
+	            	  age: age
+	              }, //dữ liệu sẽ được gửi
+	              success : function(data)  // Hàm thực thi khi nhận dữ liệu được từ server
+	                        { 
+	            	  			alert(data);
+	                           /* if(data == 'false') 
+	                           {
+	                             alert('Không nhap');
+	                           }else{
+	                             $('#content').html(data); dữ liệu HTML trả về sẽ được chèn vào trong thẻ có id content
+	                           } */
+	                        }
+	              });
+	              return false;
+	        });
+	   });
+	   
+	   
       //khai báo biến submit form lấy đối tượng nút submit
-      var submit = $("button[type='submit']");
+      //var submit = $("button[type='submit']");
 
       //khi nút submit được click
-      submit.click(function()
-      {
+      /* $("#submitForm").click(function(){
         //khai báo các biến dữ liệu gửi lên server
-        var name = $("input[name='name']").val(); //lấy giá trị trong input name
- 		var age=$("input[name=age]").val();
+        var name = $("#name").val(); //lấy giá trị trong input name
+ 		var age= $("#age").val();
         //Kiểm tra xem trường đã được nhập hay chưa
+        console.log(name)
         if(name == ''){
           alert('Vui lòng nhập Tên ');
           return false;
@@ -65,8 +98,6 @@
                         }
               });
               return false;
-        });
-    });
+        }); */
 </script>
-</body>
 </html>

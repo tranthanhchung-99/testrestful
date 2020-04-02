@@ -5,18 +5,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.linkin.entity.ConGa;
 import com.linkin.model.ConGaDTO;
 import com.linkin.service.ConGaService;
 
@@ -26,21 +23,7 @@ public class ConGaController {
 	@Autowired
 	private ConGaService conGaService;
 
-	@GetMapping(value = "/conga/list", produces = { "application/json" })
-	public @ResponseBody List<ConGaDTO> searchConGaAPI(HttpServletRequest request,
-			@RequestParam(value = "keyword", required = false) String keyword) {
-		keyword = keyword == null ? "" : keyword;
-		// mac dinh 10 ban ghi 1 trang
-		List<ConGaDTO> list = conGaService.search(keyword);
-		return list;
-	}
-
-	@PostMapping(value = "/conga-add", produces = { "application/json" })
-	@ResponseStatus(code = HttpStatus.CREATED)
-	public @ResponseBody ConGaDTO addConGaPostAPI(@RequestBody ConGaDTO conGaDTO) {
-		conGaService.add(conGaDTO);
-		return conGaDTO;
-	}
+	
 
 	@GetMapping(value = "/conga/search")
 	public String searchConGa(HttpServletRequest request,
@@ -61,10 +44,10 @@ public class ConGaController {
 		return "client/conga/add-kich-thuoc";
 	}
 
-	@PostMapping(value = "/conga/add")
-	public String addConGaPost(@ModelAttribute ConGaDTO kichThuocDTO) {
-		conGaService.add(kichThuocDTO);
-		return "redirect:/conga/search";
+	@RequestMapping(value = "/conga/add", method = RequestMethod.POST)
+	public String addConGaPost(@RequestParam String name, @RequestParam int age) {
+		conGaService.add(new ConGaDTO(name, age));
+		return "redirect:/conga/search"; 
 	}
 
 	@GetMapping(value = "/conga/update")
