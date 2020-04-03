@@ -17,7 +17,7 @@
 <body>
 <form action="/ThucHanhWeb2/client/product" method="post">
 <%
-	UserDTO client= (UserDTO) session.getAttribute("loginClient");
+	SinhVienDTO client= (SinhVienDTO) session.getAttribute("loginClient");
 %>
 	<div class="all">
 		<div class="head">

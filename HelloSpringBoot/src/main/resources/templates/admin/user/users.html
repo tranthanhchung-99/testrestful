@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>users</title>
+</head>
+<body >
+	<p>Danh sach users</p>
+	<a th:href="@{/sinhvien/add}">Add User</a>
+	<div>
+		<form th:action="@{/sinhvien/search}" method="get">
+			<label>Search:</label><input type="text" name="keyword"
+				th:value="${keyword}" placeholder="nhap keyword" /> <input
+				type="submit" value="search" />
+		</form>
+	</div>
+	<table border="1">
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Age</td>
+			<td>Email</td>
+			<td>Phone</td>
+			<td>Role</td>
+			<td>Username</td>
+			<td>Enable</td>
+			<td>Gender</td>
+			<td>Address</td>
+			<td>Option</td>
+		</tr>
+		<tr th:each="user:${userList}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.name}"></td>
+			<td th:text="${user.age}"></td>
+			<td th:text="${user.email}"></td>
+			<td th:text="${user.phone}"></td>
+			<td th:text="${user.role}"></td>
+			<td th:text="${user.username}"></td>
+			<td th:text="${user.enabled}"></td>
+			<td th:text="${user.gender}"></td>
+			<td th:text="${user.address}"></td>
+			<td><a th:href="@{'/sinhvien/update?id='+${user.id}}">Edit</a>
+				| <a th:href="@{'/sinhvien/delete?id='+${user.id}}">Delete</a> | <a
+				th:href="@{'/sinhvien/change-password?id='+${user.id}}">Change
+					Password</a></td>
+		</tr>
+	</table>
+	
+</body>
+</html>
