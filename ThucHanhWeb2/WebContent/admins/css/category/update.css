@@ -1,0 +1,80 @@
+body{
+	background-image: url(/FinalWeb09/admins/image/backgroung3.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+.all{
+	width: 1000px;
+	min-height: 500px;
+	
+	margin:0 auto;
+}
+.head{
+	width: 1000px;
+	height: 100px;
+	margin:0 auto;
+	font-size: 18px;
+	color: #0f1a33;
+	text-align: center;
+}
+.main{
+	width: 500px;
+	height: 255px;
+	background: #f5b062;
+	margin:0 auto;
+}
+.main .input{
+	width: 414px;
+	height: 55px;
+	padding-top: 25px;
+	padding-bottom: 0px;
+	text-align: center;
+	margin:0 auto;
+	margin-top: 5px;
+
+}
+.main h2{
+	width: 88px;
+	height: 30px;
+	
+	float: left;
+	margin-top:5px;
+	margin-left: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+.main input{
+	width: 300px;
+	height: 28px;
+	
+	float: left;
+	margin-top: 5px;
+}
+.btn{
+	width: 260px;
+	height: 40px;
+	margin:0 auto;
+	margin-top: 35px;
+}
+.main .btn button{
+	width: 250px;
+	height: 32px;
+	font-size: 25px;
+	margin:0 auto;
+	
+	border:1px solid green;
+
+}
+input:hover{
+	background: #b5fff9;
+	border-bottom: 2px solid red;
+}
+button:hover{
+	background: #fc8200;
+	color: white;
+}
