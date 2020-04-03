@@ -22,6 +22,6 @@ public class Client1Product extends HttpServlet {
 		req.setAttribute("product", product);
 		
 		RequestDispatcher dispatcher= req.getRequestDispatcher("/client/view/product/infor1product.jsp");
-		dispatcher.forward(req, resp);
+		dispatcher.forward(req, resp);//cskslklsklskdlk
 	}
 }
