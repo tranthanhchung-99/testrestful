@@ -1,80 +1,28 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 <meta charset="UTF-8">
 <title>users</title>
-<script type="text/javascript">
-	//var add=[[@{conga/add}]];
-   $(document).ready(function()
-   { 
-
-	   // submitForm
-	    $("#submitForm").click(function(){
-		   let name = $("#name").val();
-		   let age = $("#age").val();
-
-		   $.ajax({
-	              type : 'POST', //Sử dụng kiểu gửi dữ liệu POST
-	              url : 'http://localhost:8080/conga/add', //gửi dữ liệu sang trang data.php
-	              data : {
-	            	  name: name,
-	            	  age: age
-	              }, //dữ liệu sẽ được gửi
-	              success : function(data)  // Hàm thực thi khi nhận dữ liệu được từ server
-	                        { 
-	            	  			alert(data);
-	                           /* if(data == 'false') 
-	                           {
-	                             alert('Không nhap');
-	                           }else{
-	                             $('#content').html(data); dữ liệu HTML trả về sẽ được chèn vào trong thẻ có id content
-	                           } */
-	                        }
-	              });
-	              return false;
-	        });
-	   });
-
-
-      //khai báo biến submit form lấy đối tượng nút submit
-      var submit = $("button[type='submit']");
-      //var submit = $("button[type='submit']");
-
-      //khi nút submit được click
-      submit.click(function()
-      {
-      /* $("#submitForm").click(function(){
-        //khai báo các biến dữ liệu gửi lên server
-        var name = $("input[name='name']").val(); //lấy giá trị trong input name
- 		var age=$("input[name=age]").val();
-        var name = $("#name").val(); //lấy giá trị trong input name
- 		var age= $("#age").val();
-        //Kiểm tra xem trường đã được nhập hay chưa
-        console.log(name)
-        if(name == ''){
-          alert('Vui lòng nhập Tên ');
-          return false;
-
-                        }
-              });
-              return false;
-        });
-      });</script>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 </head>
 <body>
 	<h1>Them Nguoi Dung</h1>
-	<form th:action="@{/sinhvien/add}" method="post">
+	<div id="content"></div>
+	<form method="post" id="form-login">
 		<div>
-			<label>Name</label> <input name="name" type="text" placeholder="Name" required="required" />
+			<label>Name</label> <input name="name" type="text" placeholder="Name"
+				required="required" />
 		</div>
 		<div>
 			<label>Age</label><input type="number" name="age" placeholder="Age" />
 		</div>
 		<div>
-			<label>Email</label><input type="text" name="email" placeholder="email" />
+			<label>Email</label><input type="text" name="email"
+				placeholder="email" />
 		</div>
 		<div>
-			<label>Phone</label><input type="number" name="phone" placeholder="phone" />
+			<label>Phone</label><input type="number" name="phone"
+				placeholder="phone" />
 		</div>
 		<div>
 			<label>Gender</label> <select name="gender">
@@ -83,13 +31,16 @@
 			</select>
 		</div>
 		<div>
-			<label>Address</label> <input type="text" name="address" placeholder="address" />
+			<label>Address</label> <input type="text" name="address"
+				placeholder="address" />
 		</div>
 		<div>
-			<label>Username</label><input type="text" name="username" placeholder="username" required="required" />
+			<label>Username</label><input type="text" name="username"
+				placeholder="username" required="required" />
 		</div>
 		<div>
-			<label>Password</label><input type="password" name="password" placeholder="password" required="required" />
+			<label>Password</label><input type="password" name="password"
+				placeholder="password" required="required" />
 		</div>
 		<div>
 			<label>Role</label> <select name="role">
@@ -101,8 +52,48 @@
 			<button type="submit">ADD</button>
 		</div>
 	</form>
-
+	<script type="text/javascript">
+$(document).ready(function()
+{
+    var submit = $("button[type='submit']");
+     
+    // bắt sự kiện click vào nút Login
+    submit.click(function()
+    {
+        var username = $("input[name='username']").val();
+        var password = $("input[name='password']").val();
+         
+        // Kiểm tra đã nhập tên tài khoản chưa
+        if (username == '') {
+            alert('Vui lòng nhập tài khoản');
+            return false;
+        }
+         
+        // Kiểm tra đã nhập mật khẩu chưa
+        if (password == '') {
+            alert('Vui lòng nhập mật khẩu');
+            return false;
+        }
+         
+        // Lấy tất cả dữ liệu trong form login
+        var data = $('#form-login').serialize();
+        // Sử dụng $.ajax()
+        $.ajax({
+        type : 'POST', //kiểu post
+        url  : '/sinhvien/add', //gửi dữ liệu sang trang 
+        data : data,
+        
+        
+        success :  function(data)
+               {
+		             window.alert("add thanh cong");
+		             window.location.reload();
+               }
+        });
+        return false;
+    });
+});
+</script>
 </body>
-<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
 </html>

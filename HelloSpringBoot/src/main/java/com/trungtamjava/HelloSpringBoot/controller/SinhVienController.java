@@ -24,8 +24,9 @@ public class SinhVienController {
 		
 		List<SinhVienDTO> userList = userService.search("");
 		request.setAttribute("userList", userList);
-		
+		System.out.println("tessssssssssssssssssssssssssssssssssssssssssssssssssssssss");
 		return "admin/user/users";
+		
 	}
 	
 	@GetMapping(value = "/sinhvien/add")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import com.trungtamjava.HelloSpringBoot.model.SinhVienDTO;
 import com.trungtamjava.HelloSpringBoot.service.SinhVienService;
 
 
-
+@Controller
 @RestController
 public class APIController {
 	@Autowired
@@ -37,8 +38,9 @@ public class APIController {
 
 	@PostMapping(value = "/add-sinhvien",produces = { "application/json" })
 	@ResponseStatus(code=HttpStatus.CREATED)
-	public void addPost(@RequestBody SinhVienDTO sinhVienDTO) {
+	public SinhVienDTO addPost(@RequestBody SinhVienDTO sinhVienDTO) {
 		sinhVienService.add(sinhVienDTO);
+		return sinhVienDTO;
 	}
 	@DeleteMapping(value = "/sinhvien-delete/{id}")
 	public void delete(@PathVariable(name = "id") Long id) {
