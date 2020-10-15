@@ -51,7 +51,7 @@ public class KichThuocDaoImpl implements KichThuocDao {
 	public List<KichThuoc> search(String findName, int start, int length) {
 		String jql = "select c from KichThuoc c where c.name like :name";
 		return entityManager.createQuery(jql, KichThuoc.class).setParameter("name", "%" + findName + "%")
-				.setFirstResult(start).setMaxResults(length).getResultList();
+				.getResultList();
 	}
 
 	@Override

@@ -13,6 +13,8 @@ import com.linkin.entity.Comment;
 import com.linkin.entity.Product;
 import com.linkin.entity.User;
 import com.linkin.model.CommentDTO;
+import com.linkin.model.ProductDTO;
+import com.linkin.model.UserDTO;
 import com.linkin.service.CommentService;
 
 @Transactional
@@ -26,8 +28,13 @@ public class CommentServiceImpl implements CommentService {
 	public void insert(CommentDTO commentDTO) {
 		Comment comment = new Comment();
 		comment.setComment(commentDTO.getComment());
-		comment.setProduct(new Product(commentDTO.getProductId()));
-		comment.setUser(new User(commentDTO.getUserId()));
+		Product product= new Product();
+		product.setId(commentDTO.getProductDTO().getId());
+		comment.setProduct(product);
+		
+		User user = new User();
+		user.setId(commentDTO.getUserDTO().getId());
+		comment.setUser(user);
 		comment.setCommentDate(new Date());
 		commentDao.insert(comment);
 
@@ -64,7 +71,15 @@ public class CommentServiceImpl implements CommentService {
 			CommentDTO commentDTO= new CommentDTO();
 			commentDTO.setComment(comment.getComment());
 			commentDTO.setCommentDate(String.valueOf(comment.getCommentDate()));
-			commentDTO.setProductId(comment.getProduct().getId());
+			
+			ProductDTO productDTO= new ProductDTO();
+			productDTO.setId(comment.getProduct().getId());
+			commentDTO.setProductDTO(productDTO);
+			
+			UserDTO userDTO = new UserDTO();
+			userDTO.setName(comment.getUser().getName());
+			commentDTO.setUserDTO(userDTO);
+			
 			commentDTOs.add(commentDTO);
 		}
 		return commentDTOs;

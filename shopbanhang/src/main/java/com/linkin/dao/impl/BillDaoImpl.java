@@ -1,5 +1,6 @@
 package com.linkin.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -40,14 +41,26 @@ public class BillDaoImpl implements BillDao {
 
 	@Override
 	public List<Bill> search(String findName, int start, int length) {
-		String jql = "select b from Bill b join b.buyer u where u.name like :uname";
-		return entityManager.createQuery(jql, Bill.class).setParameter("uname","%"+findName+"%").setFirstResult(start).setMaxResults(length).getResultList();
+		String jql = "select b from Bill b join b.buyer u join b.inforBill ib" + " where u.name like :uname";
+		return entityManager.createQuery(jql, Bill.class).setParameter("uname", "%" + findName + "%").getResultList();
 	}
 
 	@Override
 	public List<Bill> searchByBuyerId(Long buyerId, int start, int length) {
-		String jql = "select b from Bill b join b.buyer u where u.id =:buyerId";
-		return entityManager.createQuery(jql, Bill.class).setParameter("buyerId", buyerId).setFirstResult(start).setMaxResults(length).getResultList();
+		String jql = "select b from Bill b join b.buyer u join b.inforBill ib where u.id =:buyerId";
+		return entityManager.createQuery(jql, Bill.class).setParameter("buyerId", buyerId).getResultList();
+	}
+
+	@Override
+	public List<Bill> searchByTrangThai(String trangThaiName, String giaoHangName) {
+		String jql = "select b from Bill b join b.buyer u join b.inforBill ib where (b.trangthai like:bTrang and b.giaohang like:bGiao)";
+		return entityManager.createQuery(jql, Bill.class).setParameter("bTrang","%" +trangThaiName+"%").setParameter("bGiao","%"+giaoHangName+"%").getResultList();
+	}
+
+	@Override
+	public List<Bill> searchByLaixuat(Date thoigian) {
+		String jql = "select b from Bill b join b.buyer u join b.inforBill ib" + " where b.buyDate like:uname";
+		return entityManager.createQuery(jql, Bill.class).setParameter("uname", "%"+thoigian+"%" ).getResultList();
 	}
 
 }

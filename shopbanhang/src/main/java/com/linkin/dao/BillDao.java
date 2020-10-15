@@ -1,5 +1,6 @@
 package com.linkin.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.linkin.entity.Bill;
@@ -16,4 +17,8 @@ public interface BillDao {
 	List<Bill> search(String findName, int start, int length);
 
 	List<Bill> searchByBuyerId(Long buyerId, int start, int length);
+	
+	List<Bill> searchByTrangThai(String trangThaiName, String giaoHangName);
+	
+	List<Bill> searchByLaixuat(Date thoiGian);
 }

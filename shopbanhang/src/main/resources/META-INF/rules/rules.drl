@@ -1,0 +1,17 @@
+package rules
+
+import com.linkin.model.TestDTO;
+
+rule "giamdoc"
+	ruleflow-group "group1"
+ when 
+  testObject: TestDTO(type=="giamdoc")
+ then
+  testObject.setSalary(30000000);
+ end
+rule "nhanvien"
+ when 
+  testObject: TestDTO(type=="nhanvien")
+ then
+  testObject.setSalary(15000000);
+ end

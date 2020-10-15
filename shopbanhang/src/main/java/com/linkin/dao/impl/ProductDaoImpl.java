@@ -36,21 +36,17 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> search(String findName, String categoryName, String thuongHieuName, String KichThuocName,
-			String gioiTinhName, Long priceStart, Long priceEnd, int start, int length) {
+			Long priceStart, Long priceEnd, int start, int length) {
 
 		try {
-			String hql = "SELECT p FROM Product p join p.category c"
-					+ " join p.thuongHieu th"
-					+ " join p.kichThuoc kt"
-					+ " join p.gioiTinh gt "
-					+ "where (p.name like:pname and c.name like:cname and th.name like:thname and kt.name like:ktname and gt.name like:gtname"
-					+ " and (p.price between :priceStart AND :priceEnd ))";
+			String hql = "SELECT p FROM Product p join p.category c" + " join p.thuongHieu th" + " join p.kichThuoc kt "
+					+ "where (p.name like:pname and c.name like:cname and th.name like:thname and kt.name like:ktname"
+					+ " and (p.priceOut between :priceStart AND :priceEnd ))";
 
 			return entityManager.createQuery(hql, Product.class).setParameter("pname", "%" + findName + "%")
 					.setParameter("cname", "%" + categoryName + "%").setParameter("thname", "%" + thuongHieuName + "%")
-					.setParameter("ktname", "%" + KichThuocName + "%").setParameter("gtname", "%" + gioiTinhName + "%")
-					.setParameter("priceStart", priceStart).setParameter("priceEnd", priceEnd).setFirstResult(start)
-					.setMaxResults(length).getResultList();
+					.setParameter("ktname", "%" + KichThuocName + "%").setParameter("priceStart", priceStart)
+					.setParameter("priceEnd", priceEnd).getResultList();
 
 		} catch (Exception e) {
 			System.out.println("loi" + e);
@@ -61,24 +57,44 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public Product get(Long id) {
-		return entityManager.find(Product.class, id);
+		// return entityManager.find(Product.class, id);
+		String hql = "SELECT p FROM Product p join p.category c" + " join p.thuongHieu th" + " join p.kichThuoc kt "
+				 + "where p.id =:pId";
+		return entityManager.createQuery(hql, Product.class).setParameter("pId", id).getSingleResult();
 	}
 
 	@Override
-	public List<Product> searchByCategory(String findName, String thuongHieuName, String KichThuocName,
-			String gioiTinhName, Long priceStart, Long priceEnd, Long categoryId, int start, int length) {
+	public List<Product> searchByCategory(String findName, String thuongHieuName, String KichThuocName, Long priceStart,
+			Long priceEnd, Long categoryId, int start, int length) {
 		String hql = "SELECT p FROM Product p  inner join Category c on c.id=p.category.id"
 				+ " inner join ThuongHieu th  on p.thuongHieu.id=th.id"
 				+ " inner join KichThuoc kt on p.kichThuoc.id=kt.id "
-				+ " inner join GioiTinh gt on p.gioiTinh.id=gt.id "
-				+ "where (p.name like:pname and p.category.id=:cId and p.thuongHieu.name like:thname and p.kichThuoc.name like:ktname and p.gioiTinh.name like:gtname"
-				+ " and (p.price between :priceStart AND :priceEnd ))";
+				+ "where (p.name like:pname and p.category.id=:cId and p.thuongHieu.name like:thname and p.kichThuoc.name like:ktname"
+				+ " and (p.priceOut between :priceStart AND :priceEnd ))";
 
 		return entityManager.createQuery(hql, Product.class).setParameter("pname", "%" + findName + "%")
-				.setParameter("thname", "%" + thuongHieuName + "%").setParameter("gtname", "%" + gioiTinhName + "%")
-				.setParameter("priceStart", priceStart).setParameter("priceEnd", priceEnd)
-				.setParameter("ktname", "%" + KichThuocName + "%").setParameter("cId", categoryId).setFirstResult(start)
-				.setMaxResults(length).getResultList();
+				.setParameter("thname", "%" + thuongHieuName + "%").setParameter("priceStart", priceStart)
+				.setParameter("priceEnd", priceEnd).setParameter("ktname", "%" + KichThuocName + "%")
+				.setParameter("cId", categoryId).getResultList();
+	}
+
+	@Override
+	public List<Product> searchName(String findName, String categoryName, String thuongHieuName, String kichThuocName,
+			Long priceStart, Long priceEnd, int start, int length) {
+		try {
+			String hql = "SELECT p FROM Product p join p.category c" + " join p.thuongHieu th" + " join p.kichThuoc kt "
+					+ "where (p.name =:pname and c.name =:cname and th.name =:thname and kt.name like:ktname"
+					+ " and (p.priceOut between :priceStart AND :priceEnd ))";
+
+			return entityManager.createQuery(hql, Product.class).setParameter("pname", findName)
+					.setParameter("cname",  categoryName ).setParameter("thname",thuongHieuName )
+					.setParameter("ktname", "%" + kichThuocName+"%" ).setParameter("priceStart", priceStart)
+					.setParameter("priceEnd", priceEnd).getResultList();
+
+		} catch (Exception e) {
+			System.out.println("loi" + e);
+		}
+		return null;
 	}
 
 }

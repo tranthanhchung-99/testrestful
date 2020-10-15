@@ -4,8 +4,8 @@ public class ReviewDTO {
 
 	private Long id;
 	private int starNumber;
-	private Long userId;
-	private Long productId;
+	private UserDTO userDTO;
+	private ProductDTO productDTO;
 
 	public ReviewDTO() {
 		super();
@@ -27,20 +27,20 @@ public class ReviewDTO {
 		this.starNumber = starNumber;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public UserDTO getUserDTO() {
+		return userDTO;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public ProductDTO getProductDTO() {
+		return productDTO;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
 	}
 
 }

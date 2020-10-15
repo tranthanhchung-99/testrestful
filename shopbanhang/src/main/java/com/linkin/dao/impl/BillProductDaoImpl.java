@@ -40,13 +40,13 @@ public class BillProductDaoImpl implements BillProductDao {
 	@Override
 	public List<BillProduct> search(String findName , int start, int length) {
 		String jql = "select bp from BillProduct bp join bp.product p join bp.bill b where p.name like :pname";
-		return entityManager.createQuery(jql, BillProduct.class).setParameter("pname","%"+ findName+"%").setFirstResult(start).setMaxResults(length).getResultList();
+		return entityManager.createQuery(jql, BillProduct.class).setParameter("pname","%"+ findName+"%").getResultList();
 	}
 
 	@Override
 	public List<BillProduct> searchByBill(Long idBill, int start, int length) {
 		String jql = "select bp from BillProduct bp join bp.product p join bp.bill b where b.id =:billId";
-		return entityManager.createQuery(jql, BillProduct.class).setParameter("billId", idBill).setFirstResult(start).setMaxResults(length).getResultList();
+		return entityManager.createQuery(jql, BillProduct.class).setParameter("billId", idBill).getResultList();
 	}
 
 }

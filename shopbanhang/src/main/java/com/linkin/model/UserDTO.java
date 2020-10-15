@@ -1,17 +1,60 @@
 package com.linkin.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserDTO {
 	private Long id;
+	@NotEmpty(message="không được để trống tên")
 	private String name;
+	@NotEmpty(message="không được để trống tuổi.")
+	@Min(value = 12, message = "tuổi không được nhỏ hơn 12.")
 	private String age;
+	@NotEmpty(message="không được để trống tuổi.")
 	private String role;
+	
 	private Boolean enabled;
+	@NotEmpty(message="không được để trống tài khoản.")
 	private String username;
+	@NotEmpty(message="không được để trống password.")
 	private String password;
+	@NotEmpty(message="không được để trống địa chỉ.")
 	private String address;
+	
 	private String gender;
+	@NotEmpty(message="không được để trống SDT.")
+	
 	private String phone;
+	@NotEmpty(message="không được để trống Email.")
+	@Email(message = "Không đúng định dạng Email")
 	private String email;
+
+	
+	
+
+	public UserDTO(Long id, @NotEmpty(message = "không được để trông name.") String name,
+			@NotEmpty(message = "không được để trống tuổi.") @Min(value = 0, message = "tuổi không được nhỏ hơn 0.") String age,
+			@NotEmpty(message = "không được để trống tuổi.") String role, Boolean enabled,
+			@NotEmpty(message = "không được để trống tài khoản.") String username,
+			@NotEmpty(message = "không được để trống password.") String password,
+			@NotEmpty(message = "không được để trống địa chỉ.") String address, String gender,
+			@NotEmpty(message = "không được để trống SDT.") String phone,
+			@NotEmpty(message = "không được để trống Email.") @Email(message = "Không đúng định dạng Email") String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.role = role;
+		this.enabled = enabled;
+		this.username = username;
+		this.password = password;
+		this.address = address;
+		this.gender = gender;
+		this.phone = phone;
+		this.email = email;
+	}
 
 	public UserDTO() {
 		super();
@@ -105,4 +148,5 @@ public class UserDTO {
 		this.email = email;
 	}
 
+	
 }

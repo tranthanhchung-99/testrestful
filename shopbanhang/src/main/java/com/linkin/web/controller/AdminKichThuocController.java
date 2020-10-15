@@ -3,10 +3,12 @@ package com.linkin.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,7 @@ public class AdminKichThuocController {
 		page = page == null ? 1 : page;
 		keyword = keyword == null ? "" : keyword;
 		// mac dinh 10 ban ghi 1 trang
-		List<KichThuocDTO> kichThuocList = kichThuocService.search(keyword, 0, page * 10);
+		List<KichThuocDTO> kichThuocList = kichThuocService.search(keyword, 0, 1000 * 10);
 		request.setAttribute("kichThuocList", kichThuocList);
 		request.setAttribute("page", page);
 		request.setAttribute("keyword", keyword);
@@ -37,16 +39,28 @@ public class AdminKichThuocController {
 	}
 
 	@GetMapping(value = "/admin/kichThuoc/add")
-	public String addKichThuoc() {
+	public String addKichThuoc(Model model) {
+		model.addAttribute("kt", new KichThuocDTO());
 		return "admin/kichthuoc/add-kich-thuoc";
 	}
 
 	@PostMapping(value = "/admin/kichThuoc/add")
-	public String addKichThuocPost(@ModelAttribute KichThuocDTO kichThuocDTO) {
-		kichThuocService.insert(kichThuocDTO);
+	public String addKichThuocPost(@ModelAttribute(name="kt") @Valid   KichThuocDTO kichThuocDTO , BindingResult bindingResult ,HttpServletRequest request) {
+		if(bindingResult.hasErrors()) {
+			return "admin/kichthuoc/add-kich-thuoc";
+		}
+		try {
+			kichThuocService.insert(kichThuocDTO);
+			
+		}catch(Exception exception) {
+			request.setAttribute("msg", "Kích thước đã tồn tại");
+			return "admin/kichthuoc/add-kich-thuoc";
+		}
+		
 
 		return "redirect:/admin/kichThuoc/search";
 	}
+
 
 	@GetMapping(value = "/admin/kichThuoc/update")
 	public String updateKichThuocGet(Model model, @RequestParam(value = "id") Long id) {
@@ -57,8 +71,19 @@ public class AdminKichThuocController {
 	}
 
 	@PostMapping(value = "/admin/kichThuoc/update")
-	public String updateKichThuocPost(@ModelAttribute KichThuocDTO kichThuocDTO) {
-		kichThuocService.update(kichThuocDTO);
+	public String updateKichThuocPost(@ModelAttribute(name="kichThuocDTO") @Valid   KichThuocDTO kichThuocDTO , BindingResult bindingResult,HttpServletRequest request) {
+		if(bindingResult.hasErrors()) {
+			return "admin/kichthuoc/update-kich-thuoc";
+		}
+		try {
+			kichThuocService.update(kichThuocDTO);
+			
+		}catch(Exception exception) {
+			request.setAttribute("msg", "Kích thước đã tồn tại");
+			return "admin/kichthuoc/update-kich-thuoc";
+		}
+		
+		
 		return "redirect:/admin/kichThuoc/search";
 	}
 

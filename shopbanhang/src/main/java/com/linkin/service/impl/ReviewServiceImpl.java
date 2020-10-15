@@ -11,8 +11,10 @@ import com.linkin.dao.ReviewDao;
 import com.linkin.entity.Product;
 import com.linkin.entity.Review;
 import com.linkin.entity.User;
+import com.linkin.model.ProductDTO;
 import com.linkin.model.ReviewDTO;
 import com.linkin.model.SearchReviewDTO;
+import com.linkin.model.UserDTO;
 import com.linkin.service.ReviewService;
 
 @Transactional
@@ -26,9 +28,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public void add(ReviewDTO reviewDTO) {
 		Review review = new Review();
 		review.setStarNumBer(reviewDTO.getStarNumber());
-		review.setProduct(new Product(reviewDTO.getProductId()));
-		review.setUser(new User(reviewDTO.getUserId()));
-
+		review.setProduct(new Product(reviewDTO.getProductDTO().getId()));
+		User user= new User();
+		user.setName(reviewDTO.getUserDTO().getName());
+		user.setId(reviewDTO.getUserDTO().getId());
+		review.setUser(user);
 		reviewDao.add(review);
 
 	}
@@ -47,8 +51,10 @@ public class ReviewServiceImpl implements ReviewService {
 		Review review = reviewDao.getById(reviewDTO.getId());
 		if (review != null) {
 			review.setStarNumBer(reviewDTO.getStarNumber());
-			review.setProduct(new Product(reviewDTO.getProductId()));
-			review.setUser(new User(reviewDTO.getUserId()));
+			review.setProduct(new Product(reviewDTO.getProductDTO().getId()));
+			User user= new User();
+			user.setName(reviewDTO.getUserDTO().getName());
+			review.setUser(user);
 		}
 		reviewDao.edit(review);
 	}
@@ -66,8 +72,12 @@ public class ReviewServiceImpl implements ReviewService {
 		ReviewDTO reviewDTO = new ReviewDTO();
 		reviewDTO.setId(review.getId());
 		reviewDTO.setStarNumber(review.getStarNumBer());
-		reviewDTO.setProductId(review.getProduct().getId());
-		reviewDTO.setUserId(review.getUser().getId());
+		ProductDTO productDTO= new ProductDTO();
+		productDTO.setId(review.getProduct().getId());
+		reviewDTO.setProductDTO(productDTO);
+		UserDTO userDTO= new UserDTO();
+		userDTO.setName(review.getUser().getName());
+		reviewDTO.setUserDTO(userDTO);
 		return reviewDTO;
 	}
 

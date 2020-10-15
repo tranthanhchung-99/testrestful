@@ -1,15 +1,37 @@
 package com.linkin.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductDTO {
 	private Long id;
 	private String name;
-	private Long price;
+	private Long priceIn;
+	private Long priceOut;
+
+	private MultipartFile multipartFile;
 	private String image;
 	private String description;
 	private CategoryDTO category;
 	private ThuongHieuDTO thuongHieuDTO;
 	private KichThuocDTO kichThuocDTO;
 	private GioiTinhDTO gioiTinhDTO;
+	private Long soLuong;
+
+	public Long getPriceIn() {
+		return priceIn;
+	}
+
+	public void setPriceIn(Long priceIn) {
+		this.priceIn = priceIn;
+	}
+
+	public Long getPriceOut() {
+		return priceOut;
+	}
+
+	public void setPriceOut(Long priceOut) {
+		this.priceOut = priceOut;
+	}
 
 	public String getDescription() {
 		return description;
@@ -51,14 +73,6 @@ public class ProductDTO {
 		this.name = name;
 	}
 
-	public Long getPrice() {
-		return price;
-	}
-
-	public void setPrice(Long price) {
-		this.price = price;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -81,6 +95,22 @@ public class ProductDTO {
 
 	public void setKichThuocDTO(KichThuocDTO kichThuocDTO) {
 		this.kichThuocDTO = kichThuocDTO;
+	}
+
+	public Long getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(Long soLuong) {
+		this.soLuong = soLuong;
+	}
+
+	public MultipartFile getMultipartFile() {
+		return multipartFile;
+	}
+
+	public void setMultipartFile(MultipartFile multipartFile) {
+		this.multipartFile = multipartFile;
 	}
 
 }

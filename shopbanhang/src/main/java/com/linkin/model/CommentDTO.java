@@ -4,8 +4,8 @@ public class CommentDTO {
 	private Long id;
 	private String commentDate;
 	private String comment;
-	private Long productId;
-	private Long userId;
+	private UserDTO userDTO;
+	private ProductDTO productDTO;
 
 	public Long getId() {
 		return id;
@@ -31,20 +31,22 @@ public class CommentDTO {
 		this.comment = comment;
 	}
 
-	public Long getProductId() {
-		return productId;
+	public UserDTO getUserDTO() {
+		return userDTO;
 	}
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public ProductDTO getProductDTO() {
+		return productDTO;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
 	}
+
+	
 
 }

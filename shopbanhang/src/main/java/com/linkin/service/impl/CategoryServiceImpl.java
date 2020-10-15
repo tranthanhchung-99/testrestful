@@ -67,4 +67,17 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDTOs;
 	}
 
+	@Override
+	public List<CategoryDTO> searchAll(String name) {
+		List<Category> categories = categoryDao.search(name);
+		List<CategoryDTO> categoryDTOs = new ArrayList<CategoryDTO>();
+		for (Category category : categories) {
+			CategoryDTO categoryDTO = new CategoryDTO();
+			categoryDTO.setId(category.getId());
+			categoryDTO.setName(category.getName());
+			categoryDTOs.add(categoryDTO);
+		}
+		return categoryDTOs;
+	}
+
 }

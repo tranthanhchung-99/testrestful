@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "kich_thuoc")
+@Table(name = "size")
 public class KichThuoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class KichThuoc implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", unique=true)
 	private String name;
 
 	public KichThuoc(Long id, String name) {

@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "bill")
@@ -33,6 +33,39 @@ public class Bill implements Serializable {
 
 	@Column(name = "discount_percent")
 	private Integer discountPercent;
+	
+	@Column(name="total")
+	private Long total;
+	 
+	@Column(name="buy_status")
+	private String trangthai;
+	
+	@Column(name="transport_status")
+	private String giaohang;
+	
+	public String getGiaohang() {
+		return giaohang;
+	}
+
+	public void setGiaohang(String giaohang) {
+		this.giaohang = giaohang;
+	}
+
+	public String getTrangthai() {
+		return trangthai;
+	}
+
+	public void setTrangthai(String trangthai) {
+		this.trangthai = trangthai;
+	}
+
+	public Long getTotal() {
+		return total;
+	}
+
+	public void setTotal(Long total) {
+		this.total = total;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "buyer_id")
@@ -44,6 +77,11 @@ public class Bill implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bill" )
 	@Column(name = "bill_Products")
 	private List<BillProduct> billProducts;
+	
+	@OneToOne(mappedBy = "bill",cascade = CascadeType.ALL)
+	private InforBill inforBill;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,5 +137,14 @@ public class Bill implements Serializable {
 	public void setBillProducts(List<BillProduct> billProducts) {
 		this.billProducts = billProducts;
 	}
+
+	public InforBill getInforBill() {
+		return inforBill;
+	}
+
+	public void setInforBill(InforBill inforBill) {
+		this.inforBill = inforBill;
+	}
+
 
 }

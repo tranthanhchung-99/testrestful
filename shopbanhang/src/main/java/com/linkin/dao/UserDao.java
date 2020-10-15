@@ -16,5 +16,7 @@ public interface UserDao {
 	User getByUserName(String userName);
 
 	List<User> search(String findName, int start, int length);
+	
+	User getByEmail(String email);
 
 }

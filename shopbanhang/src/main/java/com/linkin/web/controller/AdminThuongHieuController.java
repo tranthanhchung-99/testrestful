@@ -3,10 +3,12 @@ package com.linkin.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,7 @@ public class AdminThuongHieuController {
 		page = page == null ? 1 : page;
 		keyword = keyword == null ? "" : keyword;
 		// mac dinh 10 ban ghi 1 trang
-		List<ThuongHieuDTO> thuongHieuDTOs = thuongHieuService.search(keyword, 0, page * 10);
+		List<ThuongHieuDTO> thuongHieuDTOs = thuongHieuService.search(keyword, 0, 1000 * 10);
 		request.setAttribute("thuongHieuList", thuongHieuDTOs);
 		request.setAttribute("page", page);
 		request.setAttribute("keyword", keyword);
@@ -37,13 +39,25 @@ public class AdminThuongHieuController {
 	}
 	
 	@GetMapping(value = "/admin/thuongHieu/add")
-	public String addCategory() {
+	public String addCategory(Model model) {
+		model.addAttribute("th", new ThuongHieuDTO());
 		return "admin/thuonghieu/add-thuong-hieu";
 	}
 
 	@PostMapping(value = "/admin/thuongHieu/add")
-	public String addCategoryPost(@ModelAttribute ThuongHieuDTO thuongHieuDTO) {
-		thuongHieuService.insert(thuongHieuDTO);
+	public String addCategoryPost(@ModelAttribute(name="th") @Valid ThuongHieuDTO thuongHieuDTO, BindingResult bindingResult, HttpServletRequest request) {
+		
+		if(bindingResult.hasErrors()) {
+			return "admin/thuonghieu/add-thuong-hieu";
+		}
+		try {
+			thuongHieuService.insert(thuongHieuDTO);
+			
+		}catch(Exception exception) {
+			request.setAttribute("msg", "Thương hiệu đã tồn tại");
+			return "admin/thuonghieu/add-thuong-hieu";
+		}
+		
 
 		return "redirect:/admin/thuongHieu/search";
 	}
@@ -57,8 +71,19 @@ public class AdminThuongHieuController {
 	}
 
 	@PostMapping(value = "/admin/thuongHieu/update")
-	public String updateCategoryPost(@ModelAttribute ThuongHieuDTO thuongHieuDTO) {
-		thuongHieuService.update(thuongHieuDTO);
+	public String updateCategoryPost(@ModelAttribute(name="thuonghieu") @Valid ThuongHieuDTO thuongHieuDTO, BindingResult bindingResult,HttpServletRequest request) {
+		
+		if(bindingResult.hasErrors()) {
+			return "admin/thuonghieu/update-thuong-hieu";
+		}
+		try {
+			thuongHieuService.update(thuongHieuDTO);
+			
+		}catch(Exception exception) {
+			request.setAttribute("msg", "Thương hiệu đã tồn tại");
+			return "admin/thuonghieu/update-thuong-hieu";
+		}
+		
 		return "redirect:/admin/thuongHieu/search";
 	}
 

@@ -1,7 +1,9 @@
 package com.linkin.service;
 
+import java.util.Date;
 import java.util.List;
 
+import com.linkin.entity.Bill;
 import com.linkin.model.BillDTO;
 
 public interface BillService {
@@ -14,6 +16,10 @@ public interface BillService {
 	BillDTO get(Long id);
 
 	List<BillDTO> search(String findName, int start, int length);
-	
+
 	List<BillDTO> searchByBuyerId(Long buyerId, int start, int length);
+
+	List<BillDTO> searchByTrangThai(String trangThaiName, String giaoHangName);
+
+	List<BillDTO> searchByLaixuat(Date thoiGian);
 }

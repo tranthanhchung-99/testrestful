@@ -27,7 +27,7 @@ class EmailServiceImpl implements EmailService {
 	private static Logger logger = LoggerFactory.getLogger(EmailService.class);
 
 	@Autowired
-	public JavaMailSender emailSender;
+	public JavaMailSender emailSender;//tiem bean
 
 	@Autowired
 	private SpringTemplateEngine templateEngine;
@@ -36,16 +36,16 @@ class EmailServiceImpl implements EmailService {
 	@Async
 	public void sendSimpleMessage(String to, String subject, String text) {
 		try {
-			MimeMessage message = emailSender.createMimeMessage();
+			MimeMessage message = emailSender.createMimeMessage();//tao mail
 			MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 					StandardCharsets.UTF_8.name());
 
-			helper.setFrom("test@giaonhanh247.vn");
-			helper.setText(text, true);
-			helper.setTo(to);
-			helper.setSubject(subject);
+			helper.setFrom("shoptthpoly@gmail.com");//thong tin nguoi gui
+			helper.setText(text, true);//noi dung mail
+			helper.setTo(to);//email nguoi nhan
+			helper.setSubject(subject);//tieu de email
 
-			emailSender.send(message);
+			emailSender.send(message);//gui mail
 			System.out.println("đã gửi mail");
 		} catch (Exception ex) {
 			logger.error("Email sending ex: " + ex);
@@ -63,7 +63,7 @@ class EmailServiceImpl implements EmailService {
 			MimeMessage message = emailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 					StandardCharsets.UTF_8.name());
-			helper.setFrom("test@giaonhanh247.vn");
+			helper.setFrom("shoptthpoly@gmail.com");
 			helper.setText(html, true);
 			helper.setTo(to);
 			helper.setSubject(subject);

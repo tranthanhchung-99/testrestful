@@ -51,7 +51,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	public List<Category> search(String findName, int start, int length) {
 		String jql = "select c from Category c where c.name like :name";
 		return entityManager.createQuery(jql, Category.class).setParameter("name", "%" + findName + "%")
-				.setFirstResult(start).setMaxResults(length).getResultList();
+				.getResultList();
 	}
 
 	@Override

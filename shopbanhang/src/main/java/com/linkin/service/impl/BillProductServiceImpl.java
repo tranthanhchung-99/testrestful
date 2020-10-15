@@ -62,7 +62,6 @@ public class BillProductServiceImpl implements BillProductService {
 		if (billProduct != null) {
 			billProductDao.delete(billProduct);
 		}
-
 	}
 
 	@Override
@@ -97,7 +96,8 @@ public class BillProductServiceImpl implements BillProductService {
 		productDTO.setId(billProduct.getProduct().getId());
 		productDTO.setName(billProduct.getProduct().getName());
 		productDTO.setImage(billProduct.getProduct().getImage());
-		productDTO.setPrice(billProduct.getProduct().getPrice());
+		productDTO.setPriceOut(billProduct.getProduct().getPriceOut());
+		
 		billProductDTO.setProduct(productDTO);
 
 		return billProductDTO;

@@ -1,3 +1,4 @@
+
 package com.linkin.service.impl;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public void delete(Long id) {
 		User user = userDao.get(id);
-		if (user != null) {
+		if (user != null && user.getRole()!="ROLE_ADMIN") {
 			userDao.delete(user);
 		}
 	}
@@ -144,6 +145,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userPrincipal.setEmail(user.getEmail());
 		
 		return userPrincipal;
+	}
+
+	@Override
+	public UserDTO getByEmail(String email) {
+		User user = userDao.getByEmail(email);
+		return convert(user);
 	}
 
 }

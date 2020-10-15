@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.linkin.dao.ProductDao;
 import com.linkin.entity.Category;
-import com.linkin.entity.GioiTinh;
 import com.linkin.entity.KichThuoc;
 import com.linkin.entity.Product;
 import com.linkin.entity.ThuongHieu;
 import com.linkin.model.CategoryDTO;
-import com.linkin.model.GioiTinhDTO;
 import com.linkin.model.KichThuocDTO;
 import com.linkin.model.ProductDTO;
 import com.linkin.model.ThuongHieuDTO;
@@ -31,9 +29,11 @@ public class ProductServiceImpl implements ProductService {
 	public void insert(ProductDTO productDTO) {
 		Product product = new Product();
 		product.setName(productDTO.getName());
-		product.setPrice(productDTO.getPrice());
+		product.setPriceIn(productDTO.getPriceIn());
+		product.setPriceOut(productDTO.getPriceOut());
 		product.setDescription(productDTO.getDescription());
 		product.setImage(productDTO.getImage());
+		product.setSoLuong(productDTO.getSoLuong());
 
 		Category category = new Category();
 		category.setId(productDTO.getCategory().getId());
@@ -50,11 +50,6 @@ public class ProductServiceImpl implements ProductService {
 		kichThuoc.setName(productDTO.getKichThuocDTO().getName());
 		product.setKichThuoc(kichThuoc);
 
-		GioiTinh gioiTinh = new GioiTinh();
-		gioiTinh.setId(productDTO.getGioiTinhDTO().getId());
-		gioiTinh.setName(productDTO.getGioiTinhDTO().getName());
-		product.setGioiTinh(gioiTinh);
-
 		productDao.insert(product);
 	}
 
@@ -64,9 +59,11 @@ public class ProductServiceImpl implements ProductService {
 		if (product != null) {
 			product.setId(productDTO.getId());
 			product.setName(productDTO.getName());
-			product.setPrice(productDTO.getPrice());
+			product.setPriceIn(productDTO.getPriceIn());
+			product.setPriceOut(productDTO.getPriceOut());
 			product.setDescription(productDTO.getDescription());
 			product.setImage(productDTO.getImage());
+			product.setSoLuong(productDTO.getSoLuong());
 
 			Category category = new Category();
 			category.setId(productDTO.getCategory().getId());
@@ -78,15 +75,10 @@ public class ProductServiceImpl implements ProductService {
 			thuongHieu.setName(productDTO.getThuongHieuDTO().getName());
 			product.setThuongHieu(thuongHieu);
 
-			KichThuoc kichThuoc = new  KichThuoc();
+			KichThuoc kichThuoc = new KichThuoc();
 			kichThuoc.setId(productDTO.getKichThuocDTO().getId());
 			kichThuoc.setName(productDTO.getKichThuocDTO().getName());
 			product.setKichThuoc(kichThuoc);
-			
-			GioiTinh gioiTinh = new  GioiTinh();
-			gioiTinh.setId(productDTO.getGioiTinhDTO().getId());
-			gioiTinh.setName(productDTO.getGioiTinhDTO().getName());
-			product.setGioiTinh(gioiTinh);
 
 			productDao.update(product);
 		}
@@ -102,18 +94,20 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDTO> search(String findName, String categoryName, String thuongHieuName, String kichThuocName,
-			String gioiTinh, Long priceStart, Long priceEnd, int start, int length) {
+			Long priceStart, Long priceEnd, int start, int length) {
 
-		List<Product> listProducts = productDao.search(findName, categoryName, thuongHieuName,kichThuocName, gioiTinh,
+		List<Product> listProducts = productDao.search(findName, categoryName, thuongHieuName, kichThuocName,
 				priceStart, priceEnd, start, length);
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		for (Product product : listProducts) {
 			ProductDTO dto = new ProductDTO();
 			dto.setId(product.getId());
 			dto.setName(product.getName());
-			dto.setPrice(product.getPrice());
+			dto.setPriceIn(product.getPriceIn());
+			dto.setPriceOut(product.getPriceOut());
 			dto.setImage(product.getImage());
 			dto.setDescription(product.getDescription());
+			dto.setSoLuong(product.getSoLuong());
 
 			CategoryDTO categoryDTO = new CategoryDTO();
 			categoryDTO.setId(product.getCategory().getId());
@@ -130,11 +124,6 @@ public class ProductServiceImpl implements ProductService {
 			kichThuocDTO.setName(product.getKichThuoc().getName());
 			dto.setKichThuocDTO(kichThuocDTO);
 
-			GioiTinhDTO gioiTinhDTO = new GioiTinhDTO();
-			gioiTinhDTO.setId(product.getGioiTinh().getId());
-			gioiTinhDTO.setName(product.getGioiTinh().getName());
-			dto.setGioiTinhDTO(gioiTinhDTO);
-
 			productDTOs.add(dto);
 		}
 		return productDTOs;
@@ -148,7 +137,9 @@ public class ProductServiceImpl implements ProductService {
 		dto.setName(product.getName());
 		dto.setDescription(product.getDescription());
 		dto.setImage(product.getImage());
-		dto.setPrice(product.getPrice());
+		dto.setPriceIn(product.getPriceIn());
+		dto.setPriceOut(product.getPriceOut());
+		dto.setSoLuong(product.getSoLuong());
 
 		CategoryDTO categoryDTO = new CategoryDTO();
 		categoryDTO.setId(product.getCategory().getId());
@@ -165,25 +156,22 @@ public class ProductServiceImpl implements ProductService {
 		kichThuocDTO.setName(product.getKichThuoc().getName());
 		dto.setKichThuocDTO(kichThuocDTO);
 
-		GioiTinhDTO gioiTinhDTO = new GioiTinhDTO();
-		gioiTinhDTO.setId(product.getGioiTinh().getId());
-		gioiTinhDTO.setName(product.getGioiTinh().getName());
-		dto.setGioiTinhDTO(gioiTinhDTO);
-
 		return dto;
 	}
 
 	@Override
 	public List<ProductDTO> searchByCategory(String findName, String thuongHieuName, String kichThuocName,
-			String gioiTinhName, Long priceStart, Long priceEnd, Long categoryId, int start, int length) {
+			Long priceStart, Long priceEnd, Long categoryId, int start, int length) {
 
-		List<Product> listProducts = productDao.searchByCategory(findName, thuongHieuName, kichThuocName, gioiTinhName, priceStart, priceEnd, categoryId, start, length);
+		List<Product> listProducts = productDao.searchByCategory(findName, thuongHieuName, kichThuocName, priceStart,
+				priceEnd, categoryId, start, length);
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		for (Product product : listProducts) {
 			ProductDTO dto = new ProductDTO();
 			dto.setId(product.getId());
 			dto.setName(product.getName());
-			dto.setPrice(product.getPrice());
+			dto.setPriceIn(product.getPriceIn());
+			dto.setPriceOut(product.getPriceOut());
 			dto.setImage(product.getImage());
 			dto.setDescription(product.getDescription());
 
@@ -202,10 +190,50 @@ public class ProductServiceImpl implements ProductService {
 			kichThuocDTO.setName(product.getKichThuoc().getName());
 			dto.setKichThuocDTO(kichThuocDTO);
 
-			GioiTinhDTO gioiTinhDTO = new GioiTinhDTO();
-			gioiTinhDTO.setId(product.getGioiTinh().getId());
-			gioiTinhDTO.setName(product.getGioiTinh().getName());
-			dto.setGioiTinhDTO(gioiTinhDTO);
+			productDTOs.add(dto);
+		}
+		return productDTOs;
+	}
+
+	@Override
+	public void updateQuantity(ProductDTO productDTO) {
+		Product product = productDao.get(productDTO.getId());
+		if (product != null) {
+			product.setSoLuong(productDTO.getSoLuong());
+		}
+
+	}
+
+	@Override
+	public List<ProductDTO> searchName(String findName, String categoryName, String thuongHieuName,
+			String kichThuocName, Long priceStart, Long priceEnd, int start, int length) {
+		List<Product> listProducts = productDao.search(findName, categoryName, thuongHieuName, kichThuocName,
+				priceStart, priceEnd, start, length);
+		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
+		for (Product product : listProducts) {
+			ProductDTO dto = new ProductDTO();
+			dto.setId(product.getId());
+			dto.setName(product.getName());
+			dto.setPriceIn(product.getPriceIn());
+			dto.setPriceOut(product.getPriceOut());
+			dto.setImage(product.getImage());
+			dto.setDescription(product.getDescription());
+			dto.setSoLuong(product.getSoLuong());
+
+			CategoryDTO categoryDTO = new CategoryDTO();
+			categoryDTO.setId(product.getCategory().getId());
+			categoryDTO.setName(product.getCategory().getName());
+			dto.setCategory(categoryDTO);
+
+			ThuongHieuDTO thuongHieu = new ThuongHieuDTO();
+			thuongHieu.setId(product.getThuongHieu().getId());
+			thuongHieu.setName(product.getThuongHieu().getName());
+			dto.setThuongHieuDTO(thuongHieu);
+
+			KichThuocDTO kichThuocDTO = new KichThuocDTO();
+			kichThuocDTO.setId(product.getKichThuoc().getId());
+			kichThuocDTO.setName(product.getKichThuoc().getName());
+			dto.setKichThuocDTO(kichThuocDTO);
 
 			productDTOs.add(dto);
 		}

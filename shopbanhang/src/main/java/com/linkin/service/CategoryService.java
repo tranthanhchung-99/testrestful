@@ -14,4 +14,6 @@ public interface CategoryService {
 	CategoryDTO get(Long id);
 
 	List<CategoryDTO> search(String name, int start, int length);
+	
+	List<CategoryDTO> searchAll(String name);
 }

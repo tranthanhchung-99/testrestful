@@ -49,8 +49,13 @@ public class UserDaoImpl implements UserDao {
 		String jql = "select u from User u where name like :name";
 		Query query = entityManager.createQuery(jql, User.class);
 		query.setParameter("name", "%" + findName + "%");
-		query.setFirstResult(start).setMaxResults(length);
 		return query.getResultList();
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		String jql = " select u from User u where u.email = :mail ";
+		return entityManager.createQuery(jql, User.class).setParameter("mail", email).getSingleResult();
 	}
 
 }

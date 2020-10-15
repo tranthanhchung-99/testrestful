@@ -8,6 +8,25 @@ public class BillDTO {
 	private Long total;
 	private Integer discountPercent;
 	private String status;
+	private InforBillDTO inforBillDTO;
+	private String trangThai;
+	private String giaoHang;
+
+	public String getGiaoHang() {
+		return giaoHang;
+	}
+
+	public void setGiaoHang(String giaoHang) {
+		this.giaoHang = giaoHang;
+	}
+
+	public String getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
+	}
 
 	public Long getId() {
 		return id;
@@ -63,6 +82,14 @@ public class BillDTO {
 
 	public void setTotal(Long total) {
 		this.total = total;
+	}
+
+	public InforBillDTO getInforBillDTO() {
+		return inforBillDTO;
+	}
+
+	public void setInforBillDTO(InforBillDTO inforBillDTO) {
+		this.inforBillDTO = inforBillDTO;
 	}
 
 }

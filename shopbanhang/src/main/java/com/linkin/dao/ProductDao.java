@@ -14,10 +14,11 @@ public interface ProductDao {
 	Product get(Long id);
 
 	List<Product> search(String findName, String categoryName, String thuongHieuName, String kichThuocName,
-			String gioiTinhName, Long priceStart, Long priceEnd, int start, int length);
+			 Long priceStart, Long priceEnd, int start, int length);
 
-	List<Product> searchByCategory(String findName, String thuongHieuName, String kichThuocName, String gioiTinhName,
+	List<Product> searchByCategory(String findName, String thuongHieuName, String kichThuocName, 
 			Long priceStart, Long priceEnd, Long categoryId, int start, int length);
 
-
+	List<Product> searchName(String findName, String categoryName, String thuongHieuName, String kichThuocName,
+			 Long priceStart, Long priceEnd, int start, int length);
 }

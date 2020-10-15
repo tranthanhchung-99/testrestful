@@ -1,8 +1,11 @@
 package com.linkin.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ThuongHieuDTO {
 
 	private Long id;
+	@NotEmpty(message="Hãy nhập tên thương hiệu")
 	private String name;
 
 	public ThuongHieuDTO() {
@@ -14,7 +17,7 @@ public class ThuongHieuDTO {
 		this.name = name;
 	}
 
-	public ThuongHieuDTO(Long id, String name) {
+	public ThuongHieuDTO(Long id,@NotEmpty String name) {
 		super();
 		this.id = id;
 		this.name = name;

@@ -27,8 +27,27 @@ public class Product implements Serializable {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "price")
-	private Long price;
+	@Column(name = "price_in")
+	private Long priceIn;
+
+	@Column(name = "price_out")
+	private Long priceOut;
+
+	public Long getPriceIn() {
+		return priceIn;
+	}
+
+	public void setPriceIn(Long priceIn) {
+		this.priceIn = priceIn;
+	}
+
+	public Long getPriceOut() {
+		return priceOut;
+	}
+
+	public void setPriceOut(Long priceOut) {
+		this.priceOut = priceOut;
+	}
 
 	@Column(name = "image")
 	private String image;
@@ -43,22 +62,22 @@ public class Product implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	@Column(name = "comments")
 	private List<Comment> comments;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 
 	@ManyToOne
-	@JoinColumn(name = "thuongHieu_id")
+	@JoinColumn(name = "trademark_id")
 	private ThuongHieu thuongHieu;
 
 	@ManyToOne
-	@JoinColumn(name = "kichThuoc_id")
+	@JoinColumn(name = "size_id")
 	private KichThuoc kichThuoc;
 
-	@ManyToOne
-	@JoinColumn(name = "gioiTinh_id")
-	private GioiTinh gioiTinh;
+
+	@Column(name = "amount")
+	private Long soLuong;
 
 	public Product(Long id) {
 		super();
@@ -78,13 +97,7 @@ public class Product implements Serializable {
 		this.id = id;
 	}
 
-	public GioiTinh getGioiTinh() {
-		return gioiTinh;
-	}
-
-	public void setGioiTinh(GioiTinh gioiTinh) {
-		this.gioiTinh = gioiTinh;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -92,14 +105,6 @@ public class Product implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Long getPrice() {
-		return price;
-	}
-
-	public void setPrice(Long price) {
-		this.price = price;
 	}
 
 	public String getImage() {
@@ -156,6 +161,14 @@ public class Product implements Serializable {
 
 	public void setKichThuoc(KichThuoc kichThuoc) {
 		this.kichThuoc = kichThuoc;
+	}
+
+	public Long getSoLuong() {
+		return soLuong;
+	}
+
+	public void setSoLuong(Long soLuong) {
+		this.soLuong = soLuong;
 	}
 
 }

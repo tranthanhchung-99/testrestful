@@ -13,7 +13,7 @@ import com.linkin.entity.ThuongHieu;
 
 @Transactional
 @Repository
-public class ThuongHieuDaoImpl implements ThuongHieuDao{
+public class ThuongHieuDaoImpl implements ThuongHieuDao {
 
 	@PersistenceContext
 	EntityManager entityManager;
@@ -49,7 +49,7 @@ public class ThuongHieuDaoImpl implements ThuongHieuDao{
 	public List<ThuongHieu> search(String findName, int offset, int maxPerPage) {
 		String jql = "select c from ThuongHieu c where c.name like :name";
 		return entityManager.createQuery(jql, ThuongHieu.class).setParameter("name", "%" + findName + "%")
-				.setFirstResult(offset).setMaxResults(maxPerPage).getResultList();
+				.getResultList();
 	}
 
 	@Override

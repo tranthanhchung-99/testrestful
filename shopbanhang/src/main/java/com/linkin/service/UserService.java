@@ -14,6 +14,8 @@ public interface UserService {
 	UserDTO get(Long id);
 
 	UserDTO getByUserName(String userName);
+	
+	UserDTO getByEmail(String email);
 
 	List<UserDTO> search(String name, int start, int length);
 

@@ -1,5 +1,7 @@
 package com.linkin;
 
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,16 +32,18 @@ public class ShopbanhangApplication extends WebSecurityConfigurerAdapter {
 	}
 
 	public void configure(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority(RoleEnum.ADMIN.getRoleName())
 				.antMatchers("/member/**").authenticated().anyRequest().permitAll().and().formLogin()
 				.loginPage("/login").loginProcessingUrl("/login").defaultSuccessUrl("/member/home")
 				.failureUrl("/login?err").and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().and().exceptionHandling()
 				.accessDeniedPage("/login?deny");
+
 	}
 
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() { 	
+	public BCryptPasswordEncoder passwordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 		return bCryptPasswordEncoder;
 	}
@@ -49,5 +53,9 @@ public class ShopbanhangApplication extends WebSecurityConfigurerAdapter {
 		SpringSecurityDialect dialect = new SpringSecurityDialect();
 		return dialect;
 	}
+	@Bean
+	 public KieContainer kieContainer() {
+	  return KieServices.Factory.get().getKieClasspathContainer();
+	 }
 
 }

@@ -1,8 +1,12 @@
 package com.linkin.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class GioiTinhDTO {
 
 	private Long id;
+	@NotEmpty(message="Hãy nhập giới tính")
 	private String name;
 
 	public GioiTinhDTO() {
@@ -14,7 +18,7 @@ public class GioiTinhDTO {
 		this.name = name;
 	}
 
-	public GioiTinhDTO(Long id, String name) {
+	public GioiTinhDTO(Long id,@NotEmpty @Size(min = 2, max = 30) String name) {
 		super();
 		this.id = id;
 		this.name = name;
