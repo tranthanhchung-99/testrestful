@@ -1,0 +1,134 @@
+body {
+	background-image: url(/FinalWeb09/admins/image/backgroung3.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.all {
+	width: 1000px;
+	height: auto;
+	margin: 0 auto;
+	font-family: cursive;
+}
+
+.head {
+	width: 998px;
+	height: 55px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.main {
+	width: 420px;
+	height: 504px;
+	text-align: center;
+	margin: 0 auto;
+	background-color: #f2aa5c;
+}
+
+.name {
+	width: 414px;
+	height: 50px;
+	padding-top: 15px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.name h2 {
+	width: 100px;
+	height: 30px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.name input {
+	width: 300px;
+	height: 28px;
+	float: left;
+	margin-top: 5px;
+}
+
+.description {
+	width: 414px;
+	height: 50px;
+	padding-top: 15px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.description h2 {
+	width: 130px;
+	height: 30px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.description select {
+	width: 274px;
+	height: 32px;
+	float: left;
+	margin-top: 5px;
+	font-size: 20px;
+}
+
+.idcategory {
+	width: 414px;
+	height: 50px;
+	padding-top: 15px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.idcategory h2 {
+	width: 109px;
+	height: 30px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.idcategory select {
+	width: 295px;
+	height: 32px;
+	float: left;
+	margin-top: 5px;
+	font-size: 20px;
+}
+
+input:hover {
+	border-bottom: 2px solid red;
+	background: #cae8e2;
+}
+
+select:hover {
+	background: #cae8e2;
+	color: #ed8677;
+}
+
+.btn {
+	width: 420px;
+	height: 40px;
+	padding-top: 35px;
+}
+
+.btn button {
+	width: 300px;
+	height: 40px;
+	font-size: 30px;
+	margin: 0 auto;
+	background-color: #db792e;
+}
+
+button:hover {
+	background: #c955c2;
+	color: #4ccf78;
+}

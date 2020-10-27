@@ -1,0 +1,85 @@
+body {
+	background-image: url(/FinalWeb09/admins/image/backgroung3.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+}
+
+a {
+	text-decoration: none;
+}
+
+.all {
+	width: 1000px;
+	height: auto;
+	margin: 0 auto;
+	font-family: cursive;
+}
+
+.head {
+	width: 998px;
+	height: 55px;
+	text-align: center;
+}
+
+.main {
+	width: 420px;
+	height: 225px;
+	text-align: center;
+	margin: 0 auto;
+	background-color: #f2aa5c;
+}
+
+.password {
+	width: 414px;
+	height: 50px;
+	padding-top: 5px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.password h2 {
+	width: 115px;
+	height: 30px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+}
+
+.password input {
+	width: 283px;
+	height: 28px;
+	float: left;
+	margin-top: 5px;
+}
+
+input:hover {
+	border-bottom: 2px solid red;
+	background: #cae8e2;
+}
+
+.btn {
+	width: 420px;
+	height: 40px;
+	padding-top: 12px;
+}
+
+.btn button {
+	width: 180px;
+	height: 40px;
+	font-size: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #db792e;
+}
+
+button:hover {
+	background: #c955c2;
+	color: #4ccf78;
+}

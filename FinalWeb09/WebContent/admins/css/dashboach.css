@@ -1,0 +1,170 @@
+body {
+	background: white;
+}
+
+.all {
+	display: flex;
+	min-height: 600px;
+}
+
+.left {
+	min-height: 600px;
+	width: 15%;
+}
+
+.left .left-head {
+	width: 100%;
+	height: 100px;
+}
+
+.left .left-main {
+	width: 100%;
+	min-height: 500px;
+	background: white;
+}
+
+.left .left-head img {
+	width: 100%;
+	height: 100px;
+}
+
+.left .left-main .btn1 .btn-group {
+	width: 100%;
+}
+
+.left .left-main .btn1 .btn-group button {
+	width: 100%;
+	background: #5b87cf;
+	color: black;
+	float: right;
+}
+
+.left .left-main .btn1 .btn-group button:hover {
+	background: #fcbe53;
+	color: red;
+}
+
+.left .left-main .btn1 .btn-group  .icon {
+	float: left;
+	width: 53px;
+	height: 23px;
+}
+
+.main {
+	width: 85%;
+}
+
+.main .main-head {
+	width: 100%;
+	height: 57px;
+}
+
+.admin {
+	width: 140px;
+	height: 50px;
+	float: right;
+	margin-top: 5px;
+	margin-right: 0px;
+}
+
+.admin img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	float: left;
+}
+
+.admin img:hover {
+	border: 1px solid red;
+}
+
+.main .main-head .search {
+	margin-top: 5px;
+	margin-left: 77px;
+	width: 850px;
+	height: 55px;
+	float: left;
+}
+
+.main .main-head .search input {
+	width: 798px;
+	height: 40px;
+	float: left;
+	border: 1px groove;
+	border-bottom-right-radius: 25px;
+	border-top-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	border-top-left-radius: 25px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: rgba(255, 255, 0, 0.2);
+}
+
+.main .main-head .search input:hover {
+	background: #d1fffa;
+	border-bottom: 2px solid #f03294;
+}
+
+.main .main-head .search input, input:active, input:focus {
+	outline: 0;
+	outline-style: none;
+	outline-width: 0;
+}
+
+.main .main-head .search button:hover {
+	border: 2px solid #ffa3a8;
+}
+
+.main .main-content {
+	padding-top: 100px;
+	min-height: 600px;
+	background: #e3dce0;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+}
+
+.btn-circle.btn-lg {
+	width: 40px;
+	height: 40px;
+	padding: 8px 10px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 25px;
+	background-color: rgba(255, 255, 0, 0.2);
+	border: 1px solid #b8c2d1;
+}
+
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	font-size: 24px;
+	line-height: 1.33;
+	border-radius: 35px;
+}
+
+.main .main-head .search button, button:active, button:focus {
+	outline: 0;
+	outline-style: none;
+	outline-width: 0;
+}
+
+.btn1 a:hover {
+	background: #b0ebf7;
+	color: #c28500;
+}
+
+.chart {
+	margin-left: 10%;
+	min-height: 600px;
+}

@@ -1,0 +1,104 @@
+body {
+	background-image: url(/FinalWeb09/admins/image/background5.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+}
+
+.main {
+	width: 100%;
+}
+
+.all {
+	width: 1200px;
+	height: auto;
+	margin: 0 auto;
+}
+
+.head {
+	width: 1000px;
+	height: 50px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.add {
+	width: 299px;
+	height: 40px;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	color: #de54a9;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+}
+
+.main .timkiem {
+	width: 299px;
+	height: 40px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.main .timkiem #ip1 {
+	width: 258px;
+	height: 31px;
+	margin-right: 0px;
+}
+
+.main .timkiem #btn1 {
+	width: 37px;
+	height: 37px;
+	background-image: url("/FinalWeb09/admins/image/search.png");
+	background-size: 35px 35px;
+	margin-left: 0px;
+	padding: 12px;
+	float: right;
+}
+
+#ip1:hover {
+	background: #adb0f7;
+	border-bottom-color: #ed6d94;
+}
+
+#btn1:hover {
+	border: 3px solid #5c031e;
+}
+
+table {
+	background-color: #d1ed77;
+	margin: 0 auto;
+	width: 1100px;
+	height: auto;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+#btn2 {
+	
+}
+
+#btn3 {
+	
+}
+
+#btn2 a:hover {
+	color: red;
+}
+
+#btn3 a:hover {
+	color: red;
+}

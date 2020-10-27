@@ -1,0 +1,41 @@
+package com.ttjv.controller.admin;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ttjv.dao.ProductDao;
+import com.ttjv.impl.ProductDaoImpl;
+import com.ttjv.model.Category;
+import com.ttjv.model.Product;
+@WebServlet(urlPatterns="/admin/product/add")
+public class AdminProductAdd extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher requestDispatcher= req.getRequestDispatcher("/admins/view/product/add.jsp");
+		requestDispatcher.forward(req, resp);
+		
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Product product= new Product();
+		String name= req.getParameter("name");
+		int price= Integer.parseInt(req.getParameter("price"));
+		String image= req.getParameter("image");
+		product.setName(name);
+		product.setPrice(price);
+		product.setImage(image);
+		product.setDescription(req.getParameter("description"));
+		Category category= new Category();
+		category.setId(Integer.parseInt((req.getParameter("idCategory"))) );
+		product.setCategory(category);
+		ProductDao productDao= new ProductDaoImpl();
+		productDao.insert(product);
+		resp.sendRedirect(req.getContextPath()+"/admin/product/search");
+	}
+}
